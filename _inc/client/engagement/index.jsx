@@ -103,29 +103,26 @@ export const Engagement = ( props ) => {
 			},
 			isModuleActive = isModuleActivated( element[0] );
 
-		if ( isPro && 'undefined' !== typeof props.sitePlan.product_slug && props.sitePlan.product_slug !== 'jetpack_business' ) {
-
-			toggle = <ProStatus proFeature={ element[0] } />;
-
-			// Add a "pro" button next to the header title
-			element[1] = <span>
-				{ element[1] }
-				<Button
-					compact={ true }
-					href="#/plans"
-				>
-					{ __( 'Pro' ) }
-				</Button>
-			</span>;
-		}
-
 		if ( unavailableInDevMode ) {
 			toggle = __( 'Unavailable in Dev Mode' );
 		} else if ( isAdmin ) {
-			toggle = <ModuleToggle slug={ element[0] }
-						activated={ isModuleActive }
-						toggling={ isTogglingModule( element[0] ) }
-						toggleModule={ toggleModule } />;
+			if ( isPro && 'undefined' !== typeof props.sitePlan.product_slug && props.sitePlan.product_slug !== 'jetpack_business' ) {
+
+				toggle = <ProStatus proFeature={ element[0] } />;
+
+				// Add a "pro" button next to the header title
+				element[1] = <span>
+								{ element[1] }
+								<Button	compact={ true } href="#/plans">
+									{ __( 'Pro' ) }
+								</Button>
+							 </span>;
+			} else {
+				toggle = <ModuleToggle slug={ element[0] }
+							activated={ isModuleActive }
+							toggling={ isTogglingModule( element[0] ) }
+							toggleModule={ toggleModule } />;
+			}
 		}
 
 		let moduleDescription = isModuleActive ?
