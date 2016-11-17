@@ -107,7 +107,6 @@ export const Engagement = ( props ) => {
 			toggle = __( 'Unavailable in Dev Mode' );
 		} else if ( isAdmin ) {
 			if ( isPro && 'undefined' !== typeof props.sitePlan.product_slug && props.sitePlan.product_slug !== 'jetpack_business' ) {
-
 				toggle = <ProStatus proFeature={ element[0] } />;
 
 				// Add a "pro" button next to the header title
@@ -117,7 +116,7 @@ export const Engagement = ( props ) => {
 									{ __( 'Pro' ) }
 								</Button>
 							 </span>;
-			} else {
+			} else if ( ! isPro || ( 'undefined' !== typeof props.sitePlan.product_slug && props.sitePlan.product_slug === 'jetpack_business' ) ) {
 				toggle = <ModuleToggle slug={ element[0] }
 							activated={ isModuleActive }
 							toggling={ isTogglingModule( element[0] ) }
