@@ -778,7 +778,6 @@ function sharing_display( $text = '', $echo = false ) {
 			wp_register_script( 'sharing-js', plugin_dir_url( __FILE__ ).'sharing.js', array( 'jquery' ), $ver );
 
 			// Enqueue scripts for the footer
-
 			add_action( 'wp_footer', 'sharing_add_footer' );
 
 			// Print inline scripts that depend on jQuery
