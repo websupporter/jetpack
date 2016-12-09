@@ -8,7 +8,7 @@ import { shallow } from 'enzyme';
 /**
  * Internal dependencies
  */
-import { DashSectionHeader } from '../index';
+import DashSectionHeader from '../index';
 
 describe( 'DashSectionHeader', () => {
 
