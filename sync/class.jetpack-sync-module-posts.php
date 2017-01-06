@@ -81,10 +81,16 @@ class Jetpack_Sync_Module_Posts extends Jetpack_Sync_Module {
 	 */
 
 	function expand_wp_insert_post( $args ) {
+		if ( ! isset( $args[0],  $args[1], $args[2] ) ) {
+			return false;
+		}
 		return array( $args[0], $this->filter_post_content_and_add_links( $args[1] ), $args[2] );
 	}
 
 	function filter_blacklisted_post_types( $args ) {
+		if ( ! isset( $args[0],  $args[1], $args[2] ) ) {
+			return false;
+		}
 		$post = $args[1];
 
 		if ( in_array( $post->post_type, Jetpack_Sync_Settings::get_setting( 'post_types_blacklist' ) ) ) {
@@ -228,7 +234,12 @@ class Jetpack_Sync_Module_Posts extends Jetpack_Sync_Module {
 		}
 	}
 
-	public function send_published( $post_ID, $post, $update ) {
+	public function send_published( $post_ID = null, $post = null, $update = null ) {
+
+		if ( is_null( $post_ID ) || is_null( $post ) || is_null( $update ) ) {
+			// This is done because some plugin do some strange things.
+			return;
+		}
 		// Post revisions cause race conditions where this send_published add the action before the actual post gets synced
 		if ( wp_is_post_autosave( $post ) || wp_is_post_revision( $post ) ) {
 			return;

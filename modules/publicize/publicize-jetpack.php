@@ -447,7 +447,11 @@ class Publicize extends Publicize_Base {
 	 * Save a flag locally to indicate that this post has already been Publicized via the selected
 	 * connections.
 	 */
-	function save_publicized( $post_ID, $post, $update ) {
+	function save_publicized( $post_ID = null, $post = null, $update = null ) {
+		if ( is_null( $post_ID ) || is_null( $post ) || is_null( $update ) ) {
+			// This is done because some plugin do some strange things.
+			return;
+		}
 		// Only do this when a post transitions to being published
 		if ( get_post_meta( $post->ID, $this->PENDING ) && $this->post_type_is_publicizeable( $post->post_type ) ) {
 			$connected_services = Jetpack_Options::get_option( 'publicize_connections' );
