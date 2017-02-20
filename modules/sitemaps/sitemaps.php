@@ -240,6 +240,35 @@ function jetpack_print_news_sitemap_xsl() {
 }
 
 /**
+ * Get all images in a post.
+ *
+ * @since 4.7.0
+ *
+ * @param number $post_id Post to get all images from.
+ *
+ * @return array Indexed array with images found.
+ */
+function jetpack_sitemap_get_images( $post_id ) {
+	$media = array();
+	$methods = array(
+		'from_thumbnail'  => false,
+		'from_slideshow'  => false,
+		'from_gallery'    => false,
+		'from_attachment' => false,
+		'from_html'       => false,
+	);
+	foreach ( $methods as $method => $value ) {
+		$methods[ $method ] = true;
+		$images_collected = Jetpack_PostImages::get_images( $post_id, $methods );
+		if ( is_array( $images_collected ) ) {
+			$media = array_merge( $media, $images_collected );
+		}
+		$methods[ $method ] = false;
+	}
+	return $media;
+}
+
+/**
  * Print an XML sitemap conforming to the Sitemaps.org protocol.
  * Outputs an XML list of up to the latest 1000 posts.
  *
@@ -329,23 +358,7 @@ function jetpack_print_sitemap() {
 		// These attachments were produced with batch SQL earlier in the script
 		if ( ! post_password_required( $post->ID ) ) {
 
-			$media = array();
-			$methods = array(
-				'from_thumbnail'  => false,
-				'from_slideshow'  => false,
-				'from_gallery'    => false,
-				'from_attachment' => false,
-				'from_html'       => false,
-			);
-			foreach ( $methods as $method => $value ) {
-				$methods[ $method ] = true;
-				$images_collected = Jetpack_PostImages::get_images( $post->ID, $methods );
-				if ( is_array( $images_collected ) ) {
-					$media = array_merge( $media, $images_collected );
-				}
-				$methods[ $method ] = false;
-			}
-
+			$media = jetpack_sitemap_get_images( $post->ID );
 			$images = array();
 
 			foreach ( $media as $item ) {
@@ -712,6 +725,7 @@ function jetpack_sitemap_handle_update( $post_id ) {
  * @module sitemaps
  */
 function jetpack_sitemap_initialize() {
+	delete_transient( 'jetpack_sitemap' );
 	add_action( 'publish_post', 'jetpack_sitemap_handle_update', 12, 1 );
 	add_action( 'publish_page', 'jetpack_sitemap_handle_update', 12, 1 );
 	add_action( 'trash_post', 'jetpack_sitemap_handle_update', 12, 1 );
