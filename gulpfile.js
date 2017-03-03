@@ -382,7 +382,9 @@ gulp.task( 'frontendjs', function() {
 		.pipe( uglify() )
 		.pipe( banner( '/* Do not modify this file directly. It is minified from other JS files. */\n' ) )
 		.pipe( rename( { suffix: '.min' } ) )
-		.pipe( gulp.dest( 'js' ) )
+		.pipe( gulp.dest( function( file ) {
+			return file.base;
+		} ) )
 		.on( 'end', function() {
 			console.log( 'Your frontend JS is now uglified.' );
 		} );

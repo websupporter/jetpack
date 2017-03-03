@@ -1444,13 +1444,13 @@ EOT;
 	protected function _enqueue_assets( $script, $style ) {
 		$dependencies = is_customize_preview() ? array( 'customize-base' ) : array( 'jquery' );
 		if ( $script ) {
-			$file_path = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
-				? 'js/related-posts.min.js'
-				: 'modules/related-posts/related-posts.js';
+			$file_name = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+				? 'related-posts.min.js'
+				: 'related-posts.js';
 
 			wp_enqueue_script(
 				'jetpack_related-posts',
-				plugins_url( $file_path, JETPACK__PLUGIN_FILE ),
+				plugins_url( $file_name, __FILE__ ),
 				$dependencies,
 				self::VERSION
 			);

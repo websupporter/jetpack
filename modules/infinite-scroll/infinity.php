@@ -389,14 +389,14 @@ class The_Neverending_Home_Page {
 		if ( empty( $id ) )
 			return;
 
-		$file_path = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
-			? 'js/infinity.min.js'
-			: 'modules/infinite-scroll/infinity.js';
+		$file_name = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+			? 'infinity.min.js'
+			: 'infinity.js';
 
 		// Add our scripts.
 		wp_register_script(
 			'the-neverending-homepage',
-			plugins_url( $file_path, JETPACK__PLUGIN_FILE ),
+			plugins_url( $file_name, __FILE__ ),
 			array( 'jquery' ),
 			'4.0.0',
 			true

@@ -90,14 +90,15 @@ class Jetpack_Tiled_Gallery {
 
 	public static function default_scripts_and_styles() {
 		$file_path = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
-			? 'js/tiled-gallery.min.js'
-			: 'modules/tiled-gallery/tiled-gallery/tiled-gallery.js';
+			? 'tiled-gallery/tiled-gallery.min.js'
+			: 'tiled-gallery/tiled-gallery.js';
 
 		wp_enqueue_script(
 			'tiled-gallery',
-			plugins_url( $file_path, JETPACK__PLUGIN_FILE ),
+			plugins_url( $file_path, __FILE__ ),
 			array( 'jquery' )
 		);
+
 		if( is_rtl() ) {
 			wp_enqueue_style( 'tiled-gallery', plugins_url( 'tiled-gallery/rtl/tiled-gallery-rtl.css', __FILE__ ), array(), '2012-09-21' );
 		} else {

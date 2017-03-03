@@ -756,14 +756,14 @@ class Jetpack {
 		$load_minified = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG );
 		if ( ! wp_script_is( 'spin', 'registered' ) ) {
 			$file_path = $load_minified
-				? 'js/spin.min.js'
+				? '_inc/spin.min.js'
 				: '_inc/spin.js';
 			wp_register_script( 'spin', plugins_url( $file_path, JETPACK__PLUGIN_FILE ), false, '1.3' );
 		}
 
 		if ( ! wp_script_is( 'jquery.spin', 'registered' ) ) {
 			$file_path = $load_minified
-				? 'js/jquery.spin.min.js'
+				? '_inc/jquery.spin.min.js'
 				: '_inc/jquery.spin.js';
 			wp_register_script( 'jquery.spin', plugins_url( $file_path, JETPACK__PLUGIN_FILE ) , array( 'jquery', 'spin' ), '1.3' );
 		}
@@ -774,14 +774,14 @@ class Jetpack {
 
 		if ( ! wp_script_is( 'jetpack-twitter-timeline', 'registered' ) ) {
 			$file_path = $load_minified
-				? 'js/twitter-timeline.min.js'
+				? '_inc/twitter-timeline.min.js'
 				: '_inc/twitter-timeline.js';
 			wp_register_script( 'jetpack-twitter-timeline', plugins_url( $file_path, JETPACK__PLUGIN_FILE ) , array( 'jquery' ), '4.0.0', true );
 		}
 
 		if ( ! wp_script_is( 'jetpack-facebook-embed', 'registered' ) ) {
 			$file_path = $load_minified
-				? 'js/facebook-embed.min.js'
+				? '_inc/facebook-embed.min.js'
 				: '_inc/facebook-embed.js';
 			wp_register_script( 'jetpack-facebook-embed', plugins_url( $file_path, __FILE__ ), array( 'jquery' ), null, true );
 

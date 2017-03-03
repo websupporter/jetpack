@@ -56,11 +56,11 @@ function github_gist_shortcode( $atts, $content = '' ) {
 
 	$file_path = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
 		? 'js/gist.min.js'
-		: 'modules/shortcodes/js/gist.js';
+		: 'js/gist.js';
 
 	wp_enqueue_script(
 		'jetpack-gist-embed',
-		plugins_url( $file_path, JETPACK__PLUGIN_FILE ),
+		plugins_url( $file_path, __FILE__ ),
 		array( 'jquery' ),
 		false,
 		true

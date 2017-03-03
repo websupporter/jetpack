@@ -943,7 +943,7 @@ class Jetpack_Photon {
 	 */
 	public function action_wp_enqueue_scripts() {
 		$file_path = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
-			? 'js/photon.min.js'
+			? 'modules/photon/photon.min.js'
 			: 'modules/photon/photon.js';
 
 		wp_enqueue_script(
