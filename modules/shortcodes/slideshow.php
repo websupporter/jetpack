@@ -270,7 +270,7 @@ class Jetpack_Slideshow_Shortcode {
 	function enqueue_scripts() {
 		wp_enqueue_script( 'jquery-cycle', plugins_url( '/js/jquery.cycle.min.js', __FILE__ ), array( 'jquery' ), '20161231', true );
 
-		$file_path = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+		$file_path = Jetpack::should_load_minified_js()
 			? '/js/slideshow-shortcode.min.js'
 			: '/js/slideshow-shortcode.js';
 

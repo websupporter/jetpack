@@ -54,7 +54,7 @@ function github_gist_shortcode( $atts, $content = '' ) {
 		return '<!-- Invalid Gist ID -->';
 	}
 
-	$file_path = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+	$file_path = Jetpack::should_load_minified_js()
 		? 'js/gist.min.js'
 		: 'js/gist.js';
 

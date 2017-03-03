@@ -389,7 +389,7 @@ class The_Neverending_Home_Page {
 		if ( empty( $id ) )
 			return;
 
-		$file_name = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+		$file_name = Jetpack::should_load_minified_js()
 			? 'infinity.min.js'
 			: 'infinity.js';
 

@@ -942,7 +942,7 @@ class Jetpack_Photon {
 	 * @return null
 	 */
 	public function action_wp_enqueue_scripts() {
-		$file_path = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+		$file_path = Jetpack::should_load_minified_js()
 			? 'modules/photon/photon.min.js'
 			: 'modules/photon/photon.js';
 

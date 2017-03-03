@@ -145,7 +145,7 @@ function jetpack_instagram_handler( $matches, $atts, $url ) {
 	}
 
 	if ( ! empty( $response_body->html ) ) {
-		$file_path = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+		$file_path = Jetpack::should_load_minified_js()
 			? 'js/instagram.min.js'
 			: 'js/instagram.js';
 

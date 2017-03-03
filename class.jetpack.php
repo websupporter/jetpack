@@ -746,6 +746,21 @@ class Jetpack {
 	}
 
 	/**
+	 * Helper function to determine whether minified JS should be loaded.
+	 *
+	 * @since 4.8.0
+	 *
+	 * @return bool
+	 */
+	public static function should_load_minified_js() {
+		return (
+			! is_admin() &&
+			! ( Jetpack_Constants::is_defined( 'SCRIPT_DEBUG' ) && Jetpack_Constants::get_constant( 'SCRIPT_DEBUG') ) &&
+			! ( Jetpack_Constants::is_defined( 'IS_WPCOM' ) && Jetpack_Constants::get_constant( 'IS_WPCOM' ) )
+		);
+	}
+
+	/**
 	 * Register assets for use in various modules and the Jetpack admin page.
 	 *
 	 * @uses wp_script_is, wp_register_script, plugins_url
@@ -753,7 +768,7 @@ class Jetpack {
 	 * @return null
 	 */
 	public function register_assets() {
-		$load_minified = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG );
+		$load_minified = self::should_load_minified_js();
 		if ( ! wp_script_is( 'spin', 'registered' ) ) {
 			$file_path = $load_minified
 				? '_inc/spin.min.js'

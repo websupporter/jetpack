@@ -89,7 +89,7 @@ class Jetpack_Tiled_Gallery {
 	}
 
 	public static function default_scripts_and_styles() {
-		$file_path = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+		$file_path = Jetpack::should_load_minified_js()
 			? 'tiled-gallery/tiled-gallery.min.js'
 			: 'tiled-gallery/tiled-gallery.js';
 

@@ -1444,7 +1444,7 @@ EOT;
 	protected function _enqueue_assets( $script, $style ) {
 		$dependencies = is_customize_preview() ? array( 'customize-base' ) : array( 'jquery' );
 		if ( $script ) {
-			$file_name = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+			$file_name = Jetpack::should_load_minified_js()
 				? 'related-posts.min.js'
 				: 'related-posts.js';
 

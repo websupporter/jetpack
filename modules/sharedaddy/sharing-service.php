@@ -776,7 +776,7 @@ function sharing_display( $text = '', $echo = false ) {
 				$ver = '20141212';
 			}
 
-			$file_name = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+			$file_name = Jetpack::should_load_minified_js()
 				? 'sharing.min.js'
 				:'sharing.js';
 			wp_register_script(

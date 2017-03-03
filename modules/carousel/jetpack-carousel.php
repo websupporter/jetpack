@@ -197,7 +197,7 @@ class Jetpack_Carousel {
 
 	function enqueue_assets() {
 		if ( $this->first_run ) {
-			$file_name = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+			$file_name = Jetpack::should_load_minified_js()
 				? 'jetpack-carousel.js'
 				: 'jetpack-carousel.min.js';
 			wp_enqueue_script( 'jetpack-carousel', plugins_url( $file_name, __FILE__ ), array( 'jquery.spin' ), $this->asset_version( '20170209' ), true );

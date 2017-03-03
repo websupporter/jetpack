@@ -65,7 +65,7 @@ class Jetpack_Recipes {
 
 		wp_add_inline_style( 'jetpack-recipes-style', self::themecolor_styles() ); // add $themecolors-defined styles
 
-		$file_path = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+		$file_path = Jetpack::should_load_minified_js()
 			? 'js/recipes-printthis.min.js'
 			: 'js/recipes-printthis.js';
 		wp_enqueue_script(

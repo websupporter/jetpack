@@ -187,7 +187,7 @@ function grofiles_attach_cards() {
 
 	wp_enqueue_script( 'grofiles-cards', ( is_ssl() ? 'https://secure' : 'http://s' ) . '.gravatar.com/js/gprofiles.js', array( 'jquery' ), GROFILES__CACHE_BUSTER, true );
 
-	$file_name = ! is_admin() && ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+	$file_name = Jetpack::should_load_minified_js()
 		? 'wpgroho.min.js'
 		: 'wpgroho.js';
 
