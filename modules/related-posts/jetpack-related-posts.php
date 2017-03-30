@@ -822,7 +822,7 @@ EOT;
 
 		$options = $this->get_options();
 
-		if ( isset( $_GET['jetpackrpcustomize'] ) ) {
+		if ( JETPACK::is_staging_site() || isset( $_GET['jetpackrpcustomize'] ) ) {
 
 			// If we're in the customizer, add dummy content.
 			$date_now = current_time( get_option( 'date_format' ) );

@@ -2228,6 +2228,7 @@ class Jetpack {
 			'module_tags'               => 'Module Tags',
 			'feature'                   => 'Feature',
 			'additional_search_queries' => 'Additional Search Queries',
+			'has_staging'               => 'Has Staging',
 		);
 
 		$file = Jetpack::get_module_path( Jetpack::get_module_slug( $module ) );
@@ -2247,6 +2248,10 @@ class Jetpack {
 			$mod['auto_activate'] = 'No';
 		} else {
 			$mod['auto_activate'] = (string) $mod['auto_activate'];
+		}
+
+		if ( ! empty( $mod['has_staging'] ) && 'Yes' === (string) $mod['has_staging'] && Jetpack::is_staging_site() ) {
+			$mod['requires_connection'] = false;
 		}
 
 		if ( $mod['module_tags'] ) {

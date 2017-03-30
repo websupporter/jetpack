@@ -11,6 +11,7 @@
  * Module Tags: Recommended
  * Feature: Engagement, Jumpstart
  * Additional Search Queries: related, related posts
+ * Has Staging: Yes
  */
 class Jetpack_RelatedPosts_Module {
 	/**
